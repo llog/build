@@ -8,6 +8,8 @@ RUN echo "\n# add Android SDK platform tools to path\
 \n    PATH=\"\$HOME/platform-tools:\$PATH\"\
 \nfi\n" >> ~/.profile
 
+ENV TERM linux
+
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y && apt-get install \
   openjdk-8-jdk \
