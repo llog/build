@@ -2,6 +2,14 @@ FROM huaixiaoz/build:latest
 
 MAINTAINER huaixiaoz "hello@ifnot.cc"
 
+# Install sshd
+# Install dependencies
+RUN apt-get update && apt-get upgrade -y && apt-get install \
+  openssh-server \
+  -y && \
+  apt-get clean && \
+  rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
+
 # Exec sshd
 RUN mkdir /var/run/sshd && \
   echo 'root:root' | chpasswd && \
