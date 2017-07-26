@@ -1,0 +1,18 @@
+FROM huaixiaoz/build:latest
+
+MAINTAINER huaixiaoz "hello@ifnot.cc"
+
+# Exec sshd
+RUN mkdir /var/run/sshd && \
+  echo 'root:root' | chpasswd && \
+  echo 'hello:world' | chpasswd && \
+  sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+  sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+  sed -ri 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config
+
+EXPOSE 22
+VOLUME /build/source
+
+WORKDIR /build
+
+CMD ["/usr/sbin/sshd", "-D"]
