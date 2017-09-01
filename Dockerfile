@@ -8,7 +8,7 @@ RUN echo "\n# add Android SDK platform tools to path\
 \n    PATH=\"\$HOME/platform-tools:\$PATH\"\
 \nfi\n" >> ~/.profile
 
-ENV TERM linux
+ENV TERM xterm
 
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y && apt-get install \
