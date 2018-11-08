@@ -3,18 +3,23 @@ sudo: required
 services:
   - docker
 env:
-  - IMAGE="huaixiaoz/build" SSH="huaixiaoz/build:ssh" MY="huaixiaoz/build:my"
+  - IMAGE="huaixiaoz/build"
+    SSH="huaixiaoz/build:ssh"
+    MY="huaixiaoz/build:my"
+    M01="huaixiaoz/build:m01"
 
 script:
+  - travis_retry docker build -t "$M01" m01
   - travis_retry docker build -t "$IMAGE" .
 
 after_success:
   - docker images
-  - travis_retry docker build  -t "$SSH" ./ssh
-  - travis_retry docker build --build-arg ROOT_PASSWORD=$ROOT_PASSWORD -t "$MY" ./my
+  - travis_retry docker build  -t "$SSH" ssh
+  - travis_retry docker build --build-arg ROOT_PASSWORD=$ROOT_PASSWORD -t "$MY" my
 
 after_script:
   - docker images
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $M01
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $IMAGE
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $SSH
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push $MY
