@@ -19,7 +19,7 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
 
 # Setup environment
 RUN useradd --shell /bin/bash --home-dir /build --create-home --password hello hello
-RUN useradd --shell /bin/bash --home-dir /code --create-home --password 00 dp
+RUN useradd --shell /bin/bash --home-dir /code --create-home --password dp dp
 
 # Install sshd
 # Install dependencies
@@ -34,17 +34,14 @@ RUN apt-get update && apt-get upgrade -y && apt-get install \
 RUN mkdir /var/run/sshd && \
   echo 'root:root' | chpasswd && \
   echo 'hello:world' | chpasswd && \
+  echo 'dp:00' | chpasswd && \
   sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
   sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
   sed -ri 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g' /etc/ssh/sshd_config
 
-EXPOSE 22
-VOLUME /m01
+ENV LC_ALL C
 
-WORKDIR /build
+EXPOSE 22
+VOLUME /code
 
 CMD ["/usr/sbin/sshd", "-D"]
-
-VOLUME /build/source
-
-WORKDIR /build
