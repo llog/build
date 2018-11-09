@@ -18,8 +18,8 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
   chmod a+x /usr/local/bin/repo
 
 # Setup environment
+RUN useradd --shell /bin/bash --home-dir /dp --create-home --password dp dp
 RUN useradd --shell /bin/bash --home-dir /build --create-home --password hello hello
-RUN useradd --shell /bin/bash --home-dir /code --create-home --password dp dp
 
 # Install sshd
 # Install dependencies

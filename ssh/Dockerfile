@@ -22,6 +22,4 @@ RUN mkdir /var/run/sshd && \
 EXPOSE 22
 VOLUME /build/source
 
-WORKDIR /build
-
 CMD ["/usr/sbin/sshd", "-D"]
