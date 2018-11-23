@@ -6,7 +6,7 @@ MAINTAINER huaixiaoz "hello@ifnot.cc"
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y && apt-get install \
   openssh-server \
-  psmisc htop vim cloc bsdmainutils tree \
+  psmisc htop vim cloc bsdmainutils tree net-tools \
   -y && \
   apt-get clean && \
   rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
