@@ -26,6 +26,7 @@ __have fun and enjoy!! __
 ```
 docker pull huaixiaoz/build:ssh
 docker run --rm -it -p xx:22 huaixiaoz/build:ssh
+docker run --privileged --restart=always -d --publish 33:22 --volume /build:/home/dp/code/aosp --name build --hostname build huaixiaoz/build:ssh
 ```
 now you ssh login to do __what you want__
 
