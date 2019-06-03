@@ -4,7 +4,7 @@ MAINTAINER huaixiaoz "hello@ifnot.cc"
 
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y && apt-get install \
-  openjdk-8-jdk \
+  openjdk-8-jdk python \
   bc bison build-essential curl flex g++-multilib gcc-multilib git gnupg gperf \
   imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool \
   libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils \
